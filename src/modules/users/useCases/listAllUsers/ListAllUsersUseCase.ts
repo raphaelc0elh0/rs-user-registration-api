@@ -9,7 +9,14 @@ class ListAllUsersUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User[] {
-    // Complete aqui
+    const currentRequestingUser = this.usersRepository.findById(user_id);
+
+    // TODO add restriction in case user is not admin
+    // if (!currentRequestingUser.isAdmin) {
+    //   throw new Error("Forbidden request");
+    // }
+
+    return this.usersRepository.list();
   }
 }
 
