@@ -1,0 +1,130 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User Registration Documentation",
+    "description": "This is an User Registration API",
+    "version": "1.0.0",
+    "contact": {
+      "email": "raphael_coelho@hotmail.com.br"
+    }
+  },
+  "paths": {
+    "/users/{user_id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Get user profile",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/users/{user_id}/admin":{
+      "patch": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Turn user into admin",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "description": "List all users",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "Create user",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name":{
+                    "type":  "string"
+                  },
+                  "email":{
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Raphael Coelho",
+                  "email": "raphael@raphael.com.br"
+                }
+              }
+            }
+            
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request"
+          },
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    }
+  }
+}
