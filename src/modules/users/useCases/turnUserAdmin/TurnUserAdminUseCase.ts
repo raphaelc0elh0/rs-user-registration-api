@@ -15,12 +15,11 @@ class TurnUserAdminUseCase {
       throw new Error("User does not exist");
     }
 
-    // TODO: add restriction in case is admin
-    // if (currentUser) {
-    //   throw new Error("User already exists");
-    // }
+    if (currentUser.admin) {
+      throw new Error("User is already admin");
+    }
 
-    return this.usersRepository.turnAdmin({ user_id });
+    return this.usersRepository.turnAdmin(currentUser);
   }
 }
 
