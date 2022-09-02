@@ -9,7 +9,18 @@ class TurnUserAdminUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
   execute({ user_id }: IRequest): User {
-    // Complete aqui
+    const currentUser = this.usersRepository.findById(user_id);
+
+    if (!currentUser) {
+      throw new Error("User does not exist");
+    }
+
+    // TODO: add restriction in case is admin
+    // if (currentUser) {
+    //   throw new Error("User already exists");
+    // }
+
+    return this.usersRepository.turnAdmin({ user_id });
   }
 }
 
