@@ -9,12 +9,15 @@ class ShowUserProfileController {
   handle(request: Request, response: Response): Response {
     const { user_id } = request.params;
 
-    let user: User = {};
+    let user: User;
 
     try {
       user = this.showUserProfileUseCase.execute({ user_id });
     } catch (error) {
-      return response.status(400).json(error);
+      let status = 400;
+      if (error.message === "User does not exist") status = 404;
+
+      return response.status(status).json({ error: error.message });
     }
 
     return response.status(200).json(user);
